@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kuis UKMPPD THT – Kasus Leher, Telinga & Saluran Napas</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f4f6fb;--card:#fff;--tx:#1b2333;--mu:#64708a;--br:#d8deeb;--pr:#2f5597;--ok:#1e8e4e;--okb:#e4f5ea;--no:#c0392b;--nob:#fbe9e7}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#10141f;--card:#19202f;--tx:#e8ecf5;--mu:#94a0ba;--br:#2c364c;--pr:#7ea3e6;--okb:#143324;--nob:#3a1d1a;--ok:#56c785;--no:#ef7a6c}}
+:root[data-theme="dark"]{--bg:#10141f;--card:#19202f;--tx:#e8ecf5;--mu:#94a0ba;--br:#2c364c;--pr:#7ea3e6;--okb:#143324;--nob:#3a1d1a;--ok:#56c785;--no:#ef7a6c}
+*{box-sizing:border-box}html,body{margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--bg);color:var(--tx);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:1.3rem;margin:.2rem 0}
+.card{background:var(--card);border:1px solid var(--br);border-radius:14px;padding:18px;margin-top:14px}
+.mu{color:var(--mu);font-size:.9rem}
+.bar{height:6px;background:var(--br);border-radius:9px;overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--pr);transition:width .3s}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tag{font-size:.75rem;font-weight:700;padding:2px 9px;border-radius:99px;background:var(--pr);color:#fff}
+.q{margin:12px 0;font-size:1.02rem}
+.o{display:flex;gap:10px;width:100%;text-align:left;background:var(--card);color:var(--tx);border:1.5px solid var(--br);border-radius:10px;padding:10px 12px;margin:8px 0;font:inherit;cursor:pointer}
+.o:hover:not(:disabled){border-color:var(--pr)}
+.o b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:.8rem}
+.o.ok{background:var(--okb);border-color:var(--ok)}.o.no{background:var(--nob);border-color:var(--no)}
+.ex{margin-top:12px;padding:12px;border-radius:10px;background:var(--bg);border-left:4px solid var(--pr);font-size:.93rem}
+.btn{background:var(--pr);color:#fff;border:0;border-radius:10px;padding:11px 20px;font:inherit;font-weight:600;cursor:pointer;margin-top:14px}
+.btn.g{background:transparent;color:var(--pr);border:1.5px solid var(--pr)}
+.big{font-size:2.6rem;font-weight:800;color:var(--pr)}
+.rv{border-top:1px solid var(--br);padding:10px 0;font-size:.9rem}
+</style></head><body><div class="w" id="app"></div>
+<script>
+// Format: [level, soal, [jawaban BENAR, salah, salah, salah, salah], pembahasan]
+const D=[
+["C1","Seorang anak laki-laki 8 tahun datang dengan benjolan di leher lateral, di depan batas anterior otot sternokleidomastoideus, tidak nyeri, sudah ada sejak kecil. Diagnosis yang paling mungkin?",["Kista brankialis (celah brankial)","Kista tiroglosus","Limfadenitis tuberkulosis","Lipoma leher","Abses Bezold"],"Kista brankialis adalah kelainan kongenital akibat perkembangan abnormal apparatus brankial minggu ke-2 sampai ke-7 embrio; sering asimtomatik berupa massa di leher."],
+["C1","Pemeriksaan yang penting untuk menentukan jenis kista dan mengidentifikasi potensi karsinoma pada kista brankialis adalah…",["Histopatologi","Kultur darah","Foto polos leher","Tes Mantoux","Audiometri"],"Histopatologi menentukan jenis kista dan potensi keganasan; USG/CT/MRI dipakai untuk menentukan lokasi secara tepat."],
+["C1","Bayi 1 bulan memiliki lubang kecil di depan batas anterior otot sternokleidomastoideus yang mengeluarkan cairan/lendir. Diagnosisnya?",["Fistula brankial","Higroma kistik","Tortikolis muskular","Trakeitis","Kista dermoid"],"Fistula brankial bermanifestasi sebagai lubang kecil di depan batas anterior SCM dengan gejala utama keluarnya cairan/lendir dari leher anterior."],
+["C1","Pemeriksaan yang melibatkan injeksi kontras ke dalam fistula untuk menunjukkan jalur dan hubungannya dengan struktur penting leher adalah…",["Fistulografi","Bronkoskopi","Laringoskopi","Audiometri nada murni","Timpanometri"],"Fistulografi memudahkan eksisi lengkap sehingga menurunkan angka kekambuhan."],
+["C1","Terapi definitif kista brankialis yang paling tepat adalah…",["Eksisi kista secara operatif","Antibiotik jangka panjang","Radioterapi","Aspirasi jarum berulang","Observasi seumur hidup"],"Pengobatan kista brankialis biasanya eksisi kista secara operatif dengan preservasi selubung karotis dan saraf penting."],
+["C1","Bayi baru lahir dengan benjolan lunak, kebiruan, di leher. Diagnosis yang paling mungkin?",["Higroma kistik (cystic hygroma)","Kista brankialis","Abses Bezold","Fistula brankial","Tortikolis"],"Higroma kistik tampak sebagai benjolan lunak di bawah kulit leher/kepala dengan kulit kebiruan, terlihat sejak lahir."],
+["C1","Mekanisme etiologi higroma kistik yang paling tepat adalah…",["Penyumbatan/kerusakan sistem limfatik saat perkembangan janin","Infeksi bakteri piogenik","Trauma lahir pada otot leher","Sisa duktus tiroglosus","Aspirasi benda asing"],"Limfatik yang tersumbat tidak dapat mengalirkan cairan sehingga terbentuk benjolan berisi cairan."],
+["C1","Higroma kistik pada janin biasanya dapat terdeteksi pada pemeriksaan USG rutin sekitar usia kehamilan…",["Minggu ke-20","Minggu ke-4","Minggu ke-8","Minggu ke-32","Minggu ke-40"],"Kista ini umumnya terdeteksi sekitar minggu ke-20 kehamilan."],
+["C2","Bayi 2 bulan, kepala miring ke kanan dengan wajah menoleh ke kiri, teraba massa keras di otot sternokleidomastoideus kanan. Mekanisme yang mendasari?",["Pemendekan SCM akibat fibrosis","Sumbatan limfatik","Sisa apparatus brankial","Abses mastoid","Obstruksi trakea"],"Tortikolis muskular kongenital: pemendekan SCM karena fibrosis menyebabkan kepala miring dan rotasi."],
+["C1","Terapi non-medikamentosa tortikolis yang tepat adalah…",["Fisioterapi, masase otot leher, torticollis brace","Trakeostomi","Drainase abses","Bronkoskopi","Eksisi fistula"],"Tatalaksana tortikolis: farmakologi (benzodiazepin, relaksan otot, antikolinergik), injeksi toksin botulinum, fisioterapi/osteopati, masase & brace."],
+["C2","Anak dengan riwayat otitis media kronik, otore, demam, bengkak dari belakang telinga hingga leher, nyeri, dan gerak leher terbatas. Diagnosisnya?",["Abses Bezold","Parotitis (mumps)","Limfadenitis servikal","Kista brankialis","Higroma kistik"],"Abses Bezold adalah abses leher dalam pada SCM akibat penjalaran pus dari mastoiditis."],
+["C2","Urutan patogenesis abses Bezold yang benar adalah…",["Otitis media → mastoiditis → destruksi tip mastoid → abses Bezold","Faringitis → trakeitis → abses Bezold","Sinusitis → orbita → abses Bezold","Parotitis → limfadenitis → abses Bezold","Trauma leher → hematoma → abses Bezold"],"Pus menembus destruksi tip mastoid dan menjalar ke otot sternokleidomastoideus."],
+["C2","Bayi 8 bulan tiba-tiba tersedak saat bermain, tidak dapat menangis/batuk, sianosis. Tindakan pertama yang tepat?",["Back blows dan chest thrust","Abdominal thrust (Heimlich)","Memberi minum air","Menunggu hingga batuk spontan","Antibiotik intravena"],"Pada bayi dengan obstruksi jalan napas total dilakukan back blows dan chest thrust; abdominal thrust tidak dianjurkan."],
+["C1","Bakteri penyebab trakeitis bakteri yang paling sering adalah…",["Staphylococcus aureus","Escherichia coli","Salmonella typhi","Neisseria gonorrhoeae","Shigella"],"Trakeitis bakteri biasanya disebabkan Staphylococcus aureus; lainnya S. pneumoniae, H. influenzae, Moraxella catarrhalis."],
+["C2","Gambaran rontgen servikal AP pada trakeitis yang khas adalah…",["Penyempitan area subglotis (steeple sign)","Thumb sign pada epiglotis","Air trapping unilateral","Gambaran sarang tawon","Pneumotoraks tension"],"Rontgen servikal/toraks pada trakeitis menunjukkan penyempitan subglotis (steeple sign)."],
+["C3","Wanita 22 tahun dengan benjolan leher lateral yang sebelumnya kecil kini membesar, nyeri, kemerahan, demam setelah ISPA. Langkah tatalaksana yang paling tepat?",["Antibiotik terlebih dahulu, eksisi setelah infeksi teratasi","Eksisi segera saat fase infeksi","Radioterapi","Skleroterapi steroid","Observasi tanpa terapi"],"Infeksi yang tidak diobati sebelum operasi meningkatkan kemungkinan kista muncul kembali."],
+["C3","Kista celah brankial berada di anterior SCM, lateral dari arteri karotis, dan posterior glandula submandibula. Klasifikasinya?",["Tipe 2 (paling sering)","Tipe 1","Tipe 3","Tipe 4","Tipe 0"],"Tipe 2: anterior SCM, lateral karotis, posterior gld submandibula; paling sering ditemukan."],
+["C4","Pada CT leher, kista meluas ke medial di antara bifurkasio arteri karotis interna dan eksterna menuju dinding lateral faring. Klasifikasi dan implikasi operasinya?",["Tipe 3; perlu hati-hati preservasi karotis dan saraf","Tipe 1; insisi superfisial cukup","Tipe 2; tanpa risiko vaskular","Tipe 4; sudah ke mukosa faring sehingga tidak perlu operasi","Higroma kistik"],"Tipe 3 meluas medial di antara ICA–ECA menuju dinding lateral faring; selubung karotis dan saraf harus diidentifikasi dan dipreservasi."],
+["C4","Laki-laki 55 tahun dengan massa kistik leher lateral yang baru muncul di usia tua; histopatologi menunjukkan keganasan di dinding kista. Kemungkinan terbesar?",["Karsinoma kista brankialis","Fistula brankial terinfeksi","Higroma kistik","Abses Bezold","Tortikolis"],"Kista brankialis dapat menjadi karsinoma kista brankialis walau sangat jarang; itulah pentingnya histopatologi."],
+["C3","Bayi dengan lubang fistula leher anterior dan abses disertai tanda radang. Rencana definitif yang tepat?",["Terapi infeksi, fistulografi, lalu fistulektomi lengkap","Penutupan lubang dengan jahitan saja","Kemoterapi","Skleroterapi","Bronkoskopi"],"Infeksi diatasi dahulu; fistulografi memetakan jalur, lalu eksisi lengkap (fistulektomi) menurunkan kekambuhan."],
+["C4","Bayi baru lahir dengan massa besar higroma kistik leher kiri, stridor, dan retraksi dada. Prioritas utama?",["Amankan jalan napas","Eksisi elektif 6 bulan lagi","Skleroterapi segera","CVS/amniosentesis","Fisioterapi leher"],"Kista besar dapat menyumbat jalan napas; airway–breathing adalah prioritas sebelum terapi definitif."],
+["C3","Ibu hamil 20 minggu, USG menunjukkan higroma kistik pada janin. Pemeriksaan lanjutan yang tepat?",["Pemeriksaan genetik (CVS/amniosentesis)","Bronkoskopi ibu","Fistulografi","Audiometri","Kultur sekret telinga"],"Higroma kistik prenatal dikaitkan dengan mutasi/kelainan genetik; dilakukan CVS atau amniosentesis. Prognosis prenatal umumnya lebih buruk."],
+["C4","Anak dengan higroma kistik besar yang melingkupi pembuluh darah dan saraf leher; operasi total dikhawatirkan merusak jaringan sekitar. Pilihan terapi?",["Skleroterapi (penyuntikan obat ke kista) atau steroid","Antibiotik oral saja","Tonsilektomi","Trakeostomi profilaksis","Pemasangan brace"],"Bila pengangkatan berisiko merusak jaringan lain, dapat dilakukan skleroterapi, steroid, kemoterapi atau radioterapi."],
+["C4","Pria 30 tahun, kepala miring mendadak, tremor kepala, nyeri leher, dua hari setelah mulai haloperidol. Diagnosis dan terapi?",["Tortikolis efek ekstrapiramidal; antikolinergik/benzodiazepin","Tortikolis muskular kongenital; eksisi SCM","Abses Bezold; drainase","Kista brankialis; eksisi","Trakeitis; intubasi"],"Efek ekstrapiramidal adalah salah satu tipe tortikolis; farmakologi meliputi antikolinergik, benzodiazepin, relaksan otot."],
+["C3","Bayi dengan riwayat persalinan sulit, wajah asimetris, keterlambatan motorik, dan massa SCM. Tatalaksana awal yang paling sesuai?",["Terapi konservatif fisioterapi/peregangan leher","Bronkoskopi","Fistulektomi","Drainase abses","Antibiotik spektrum luas"],"Tortikolis muskular ditangani konservatif (fisioterapi, masase, brace); USG leher dapat membantu penunjang."],
+["C4","Anak 6 tahun otore kronik, demam, bengkak tip mastoid hingga SCM, nyeri tekan berfluktuasi, paresis fasialis. CT: pus di SCM dan bony defect korteks mastoid. Tatalaksana yang tepat?",["Drainase abses + antibiotik spektrum luas berdasarkan kultur","Antipiretik saja","Eksisi kista","Injeksi toksin botulinum","Skleroterapi"],"Abses Bezold ditangani drainase/evakuasi pus mastoid dan antibiotik spektrum luas (aerob–anaerob, gram positif–negatif); prognosis baik bila dini."],
+["C3","Anak 3 tahun tersedak kacang 3 hari lalu, kini batuk dan wheezing unilateral kanan; foto toraks hiperinflasi unilateral (air trapping). Tindakan definitif?",["Bronkoskopi ekstraksi benda asing","Nebulisasi salbutamol saja","Antibiotik oral saja","Heimlich berulang","Observasi di rumah"],"Bronkoskopi adalah modalitas diagnostik sekaligus terapi; tindakan bedah (bronkotomi) bila gagal."],
+["C4","Anak 4 tahun pneumonia berulang, riwayat tersedak biji zaitun 2 bulan lalu, foto toraks atelektasis total paru kanan. Komplikasi kronik yang dikhawatirkan bila ekstraksi terlambat?",["Bronkiektasis lokal dan abses paru","Higroma kistik","Kista brankialis","Tortikolis","Abses Bezold"],"Keterlambatan ekstraksi menyebabkan atelektasis, pneumonia kronik pasca-obstruksi, abses paru, bronkiektasis, fistula bronkopleura."],
+["C4","Anak 5 tahun demam tinggi, batuk nyeri substernal, stridor inspirasi, distres napas, sianosis; leukositosis dan steeple sign. Tindakan pertama yang paling tepat?",["Manajemen jalan napas (intubasi), antibiotik, rawat ICU","Antitusif dan pulang","Kultur saja lalu tunggu hasil","Skleroterapi","Drainase abses leher"],"Trakeitis bakteri dapat mengancam jalan napas; prognosis bergantung pada penatalaksanaan gawat darurat."],
+["C4","Pada anak dengan trakeitis bakteri berat, intubasi gagal karena edema dan sekret tebal, saturasi terus turun. Tindakan selanjutnya?",["Trakeostomi emergensi","Mengulang nebulisasi","Menambah antitusif","Foto toraks ulang","Observasi 24 jam"],"Trakeostomi emergensi dilakukan bila pasien tidak dapat diintubasi (atau pasca-intubasi bila diperlukan)."]
+];
+const $=id=>document.getElementById(id),app=$('app');
+const sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+let Q,i,score,log;
+function start(){Q=sh(D).map(d=>{const o=sh(d[2].map((t,k)=>({t,c:k===0})));return{l:d[0],q:d[1],o,e:d[3]}});i=0;score=0;log=[];show();scrollTo(0,0)}
+function intro(){app.innerHTML=`<h1>Kuis Kasus UKMPPD – THT</h1><p class="mu">Fistula & Kista Brankial, Higroma Kistik, Tortikolis, Abses Bezold, Aspirasi, Trakeitis.</p><div class="card"><p>30 soal kasus klinis (15 soal C1–C2 dan 15 soal C3–C4), 5 pilihan (A–E). Urutan soal dan pilihan diacak setiap kali kuis dimulai.</p><button class="btn" id="go">Mulai Kuis</button></div>`;$('go').onclick=start}
+function show(){if(i>=Q.length)return end();const q=Q[i];
+app.innerHTML=`<div class="top"><h1>Kuis THT</h1><span class="mu">Soal ${i+1}/${Q.length} · Skor ${score}</span></div><div class="bar"><i style="width:${i/Q.length*100}%"></i></div>
+<div class="card"><span class="tag">${q.l}</span><p class="q">${q.q}</p><div id="os">${q.o.map((o,k)=>`<button class="o" data-k="${k}"><b>${'ABCDE'[k]}</b><span>${o.t}</span></button>`).join('')}</div><div id="fb"></div></div>`;
+document.querySelectorAll('.o').forEach(b=>b.onclick=()=>pick(+b.dataset.k))}
+function pick(k){const q=Q[i],ok=q.o[k].c;if(ok)score++;log.push({q,ok,k});
+document.querySelectorAll('.o').forEach((b,n)=>{b.disabled=true;if(q.o[n].c)b.classList.add('ok');else if(n===k)b.classList.add('no')});
+$('fb').innerHTML=`<div class="ex"><b>${ok?'Benar ✓':'Salah ✗'}</b> — ${q.e}</div><button class="btn" id="nx">${i===Q.length-1?'Lihat Hasil':'Soal Berikutnya'}</button>`;
+$('nx').onclick=()=>{i++;show();scrollTo(0,0)}}
+function end(){const lv=l=>{const a=log.filter(x=>l.includes(x.q.l));return a.filter(x=>x.ok).length+'/'+a.length};
+const wr=log.filter(x=>!x.ok);
+app.innerHTML=`<h1>Hasil Kuis</h1><div class="card"><div class="big">${Math.round(score/Q.length*100)}%</div><p>Benar ${score} dari ${Q.length} soal.</p><p class="mu">C1–C2: ${lv(['C1','C2'])} · C3–C4: ${lv(['C3','C4'])}</p><button class="btn" id="rs">Ulangi (soal diacak ulang)</button></div>
+<div class="card"><b>Pembahasan soal yang salah (${wr.length})</b>${wr.length?wr.map(x=>`<div class="rv"><span class="tag">${x.q.l}</span> ${x.q.q}<br><span style="color:var(--no)">Jawabanmu: ${x.q.o[x.k].t}</span><br><span style="color:var(--ok)">Benar: ${x.q.o.find(o=>o.c).t}</span><br><span class="mu">${x.q.e}</span></div>`).join(''):'<p>Semua jawaban benar. Luar biasa!</p>'}</div>`;
+$('rs').onclick=start;scrollTo(0,0)}
+intro();
+</script></body></html>
